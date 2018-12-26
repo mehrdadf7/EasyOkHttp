@@ -43,13 +43,13 @@ artifacts {
 }
 
 version = "1.0.0"
-group = "com.github.mehrdadf7"
+group = "github.mehrdadf7"
 
 bintray {
     user = 'mehrdadf7'
     key = 'dd72ef9515e1f934ce379fdb65f5f5a4fd6ea7f5'
     pkg {
-        repo = 'com.github.mehrdadf7'
+        repo = 'github.mehrdadf7'
         userOrg = 'mehrdadf7'
         name = 'EasyOkHttp'
 
