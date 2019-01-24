@@ -21,6 +21,7 @@ implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
       . send request
       . cancel request
       . is sending request
+      . update state
       . GET, POST request
 
 # How to use
