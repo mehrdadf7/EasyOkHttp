@@ -83,31 +83,24 @@ OkHttpInjector.getHttpClient().makeRequest(
 ```java
 // Observer<T> and Observable<T> in 'io.reactivex' package name
 public void requestName(Observer<ClassModel> observer) {
-        Observable<ClassModel> observable =
                 OkHttpInjector.getHttpClient().makeRequest(
                         HttpRequest.Method.GET, //HttpRequest.Method.POST
                         url,
                         "", //jsonObject.toString()
                         ClassModel.class
-                ).send();
-        observable
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
+                ).send().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread())
                 .subscribe(observer);
     }
 ```
 ### KOTLIN
 ```kotlin
 fun requestName(observer: Observer<ClassModel>) {
-        val observable = OkHttpInjector.getHttpClient()?.makeRequest(
+        OkHttpInjector.getHttpClient()?.makeRequest(
             HttpRequest.Method.GET, //HttpRequest.Method.POST
             url,
             "", //jsonObject.toString()
             ClassModel::class.java
-        )?.send()
-        observable
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribeOn(Schedulers.newThread())
+        )?.send()?.observeOn(AndroidSchedulers.mainThread())?.subscribeOn(Schedulers.newThread())
             ?.subscribe(observer)
     }
 ```
