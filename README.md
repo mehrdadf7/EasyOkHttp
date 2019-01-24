@@ -35,16 +35,12 @@ implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 
 #### activity or fragment :
 ```java
-Observable<T> observable = OkHttpInjector.getHttpClient().makeRequest(
+OkHttpInjector.getHttpClient().makeRequest(
       HttpRequest.Method method, //GET, POST
       String url, 
       String requestBody, 
       Class<T> responseType //ClassModel.class
-  ).send();
-  
-  observable
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
+  ).send().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread())
                 .subscribe(new Observer<T>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -66,6 +62,21 @@ Observable<T> observable = OkHttpInjector.getHttpClient().makeRequest(
                       //complete-request
                     }
                 });
+                
+/*************** OR ******************/    
+
+OkHttpInjector.getHttpClient().makeRequest(
+      HttpRequest.Method method, //GET, POST
+      String url, 
+      String requestBody, 
+      Class<T> responseType //ClassModel.class
+  ).send(activity, new OnResultCallback<T>() {
+            @Override
+            public void onReceived(T t) {
+                  //response(t)
+            }
+        });                
+
 ```
 
 ### JAVA
