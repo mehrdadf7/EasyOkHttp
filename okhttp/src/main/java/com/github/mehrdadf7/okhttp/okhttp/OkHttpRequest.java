@@ -37,10 +37,18 @@ public class OkHttpRequest<T> extends HttpRequest<T> {
                 MediaType contentType = MediaType.parse("application/json; charset=utf-8");
                 RequestBody json = RequestBody.create(contentType, requestBody);
 
-                request = new Request.Builder()
-                        .url(url)
-                        .post(json)
-                        .build();
+
+                if (method == Method.GET) {
+                    request = new Request.Builder()
+                            .url(url)
+                            .build();
+                } else if (method == Method.POST) {
+                    request = new Request.Builder()
+                            .url(url)
+                            .post(json)
+                            .build();
+                }
+
                 call = okHttpClient.newCall(request);
                 state = State.SENT;
                 Log.e(TAG,"Request is sending to: " + request.url());
