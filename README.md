@@ -19,13 +19,6 @@ implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 ```
 
-# Options
-      . send request
-      . cancel request
-      . is sending request
-      . update state
-      . GET, POST request
-
 # How to use
 
 #### AndroidManifest.xml :
