@@ -11,20 +11,17 @@ and
 # Quick Setup
 add EasyOkHttp to dependencies :
 ```java
-implementation 'github.mehrdadf7:okhttp:1.0.3'
+implementation 'github.mehrdadf7:okhttp:1.0.4'
 ```
 add RxJava-RxAndroid to dependencies :
 ```java
 implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 ```
-
-# Options
-      . send request
-      . cancel request
-      . is sending request
-      . update state
-      . GET, POST request
+(optional) If you need @SerializedName("key_name") add Gson :
+```java
+implementation 'com.google.code.gson:gson:2.8.5'
+```
 
 # How to use
 
@@ -35,16 +32,12 @@ implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 
 #### activity or fragment :
 ```java
-Observable<T> observable = OkHttpInjector.getHttpClient().makeRequest(
+OkHttpInjector.getHttpClient().makeRequest(
       HttpRequest.Method method, //GET, POST
       String url, 
       String requestBody, 
       Class<T> responseType //ClassModel.class
-  ).send();
-  
-  observable
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
+  ).send().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread())
                 .subscribe(new Observer<T>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -66,37 +59,45 @@ Observable<T> observable = OkHttpInjector.getHttpClient().makeRequest(
                       //complete-request
                     }
                 });
+                
+/*************** OR ******************/    
+
+OkHttpInjector.getHttpClient().makeRequest(
+      HttpRequest.Method method, //GET, POST
+      String url, 
+      String requestBody, 
+      Class<T> responseType //ClassModel.class
+  ).send(activity, new OnResultCallback<T>() {
+            @Override
+            public void onReceived(T t) {
+                  //response(t)
+            }
+        });                
+
 ```
 
 ### JAVA
 ```java
 // Observer<T> and Observable<T> in 'io.reactivex' package name
 public void requestName(Observer<ClassModel> observer) {
-        Observable<ClassModel> observable =
                 OkHttpInjector.getHttpClient().makeRequest(
                         HttpRequest.Method.GET, //HttpRequest.Method.POST
                         url,
                         "", //jsonObject.toString()
                         ClassModel.class
-                ).send();
-        observable
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
+                ).send().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread())
                 .subscribe(observer);
     }
 ```
 ### KOTLIN
 ```kotlin
 fun requestName(observer: Observer<ClassModel>) {
-        val observable = OkHttpInjector.getHttpClient()?.makeRequest(
+        OkHttpInjector.getHttpClient()?.makeRequest(
             HttpRequest.Method.GET, //HttpRequest.Method.POST
             url,
             "", //jsonObject.toString()
             ClassModel::class.java
-        )?.send()
-        observable
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribeOn(Schedulers.newThread())
+        )?.send()?.observeOn(AndroidSchedulers.mainThread())?.subscribeOn(Schedulers.newThread())
             ?.subscribe(observer)
     }
 ```
