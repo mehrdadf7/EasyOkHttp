@@ -29,7 +29,7 @@ implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 # How to use
 
 #### AndroidManifest.xml :
-```java
+```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
