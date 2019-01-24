@@ -1,6 +1,13 @@
 package com.github.mehrdadf7.okhttp;
 
+import android.app.Activity;
+
+import com.github.mehrdadf7.okhttp.okhttp.OkHttpRequest;
+
 import io.reactivex.Observable;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public abstract class HttpRequest<T> {
 
@@ -17,6 +24,7 @@ public abstract class HttpRequest<T> {
         this.responseType = responseType;
     }
 
+    public abstract void send(Activity activity, OnResultCallback<T> onResultCallback);
     public abstract Observable<T> send();
 
     public abstract void cancel();

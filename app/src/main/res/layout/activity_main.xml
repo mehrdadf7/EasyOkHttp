@@ -16,7 +16,6 @@
             android:layout_height="56dp">
 
             <ProgressBar
-                android:visibility="gone"
                 android:padding="16dp"
                 android:id="@+id/progressBar"
                 style="@style/Widget.AppCompat.ProgressBar"

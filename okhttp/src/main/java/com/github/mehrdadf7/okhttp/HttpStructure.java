@@ -1,6 +1,6 @@
 package com.github.mehrdadf7.okhttp;
 
-public interface HttpClient {
+public interface HttpStructure {
     <T> HttpRequest<T> makeRequest(
             HttpRequest.Method method,
             String url,

@@ -1,14 +1,14 @@
 package com.github.mehrdadf7.okhttp;
 
-import com.github.mehrdadf7.okhttp.okhttp.OkHttp3HttpClient;
+import com.github.mehrdadf7.okhttp.okhttp.OkHttp;
 
 public class OkHttpInjector {
 
-    private static HttpClient httpClient;
+    private static HttpStructure httpClient;
 
-    public static HttpClient getHttpClient() {
+    public static HttpStructure getHttpClient() {
         if (httpClient == null) {
-            httpClient = new OkHttp3HttpClient();
+            httpClient = new OkHttp();
         }
         return httpClient;
     }

@@ -1,16 +1,16 @@
 package com.github.mehrdadf7.okhttp.okhttp;
 
-import com.github.mehrdadf7.okhttp.HttpClient;
+import com.github.mehrdadf7.okhttp.HttpStructure;
 import com.github.mehrdadf7.okhttp.HttpRequest;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
-public class OkHttp3HttpClient implements HttpClient {
+public class OkHttp implements HttpStructure {
 
     protected static OkHttpClient okHttpClient;
 
-    public OkHttp3HttpClient() {
+    public OkHttp() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
         okHttpClient = new OkHttpClient.Builder()

@@ -14,15 +14,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.github.mehrdadf7.okhttp.OnResultCallback;
+import com.github.mehrdadf7.okhttp.okhttp.OkHttpRequest;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class MainActivity extends AppCompatActivity implements Observer<ArticleList> {
+public class MainActivity extends AppCompatActivity implements OnResultCallback<ArticleList> {
 
     private ProgressBar progressBar;
     private AppCompatTextView status, totalArticles;
     private RecyclerView recyclerView;
     private final String TAG = this.getClass().getSimpleName();
+    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,31 +56,19 @@ public class MainActivity extends AppCompatActivity implements Observer<ArticleL
             progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, android.R.color.white), PorterDuff.Mode.SRC_IN);
         }
 
-        ApiService apiService = new ApiService();
+        apiService = new ApiService(this);
         apiService.getArticles(this);
-    }
-
-    @Override
-    public void onSubscribe(Disposable d) {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onNext(ArticleList articleList) {
-        status       .setText(articleList.getStatus());
-        totalArticles.setText(String.valueOf(articleList.getTotalResults()));
-        recyclerView.setAdapter(new ArticleAdapter(articleList.getArticleList()));
-        Log.e(TAG, "onNext: " + articleList.getArticleList().size());
 
     }
 
     @Override
-    public void onError(Throwable e) {
-        Log.e(TAG, "onError: " + e.toString());
-    }
-
-    @Override
-    public void onComplete() {
+    public void onReceived(final ArticleList articleList) {
         progressBar.setVisibility(View.GONE);
+        Log.e(TAG, "onReceived: " + articleList.getStatus());
+        Log.e(TAG, "onReceived: " + articleList.getTotalResults());
+        status       .setText(articleList.getStatus());
+        totalArticles.setText(articleList.getTotalResults()+"");
+        recyclerView.setAdapter(new ArticleAdapter(articleList.getArticleList()));
     }
+
 }

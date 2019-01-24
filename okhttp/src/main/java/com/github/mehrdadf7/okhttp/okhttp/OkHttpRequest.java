@@ -1,14 +1,19 @@
 package com.github.mehrdadf7.okhttp.okhttp;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.github.mehrdadf7.okhttp.HttpRequest;
+import com.github.mehrdadf7.okhttp.OnResultCallback;
 import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -28,15 +33,58 @@ public class OkHttpRequest<T> extends HttpRequest<T> {
     }
 
     @Override
+    public void send(final Activity activity, final OnResultCallback<T> onResultCallback) {
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        OkHttpClient okHttpClient = OkHttp.okHttpClient;
+                        MediaType contentType = MediaType.parse("application/json; charset=utf-8");
+                        RequestBody json = RequestBody.create(contentType, requestBody);
+
+                        if (method == Method.GET) {
+                            request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+                        } else if (method == Method.POST) {
+                            request = new Request.Builder()
+                                    .url(url)
+                                    .post(json)
+                                    .build();
+                        }
+                        call = okHttpClient.newCall(request);
+                        state = State.SENT;
+                        Log.e(TAG,"Request is sending to: " + request.url());
+
+                        try {
+                            Response response = call.execute();
+                            state = State.SUCCESS;
+                            Gson gson = new Gson();
+                            final T res = gson.fromJson(response.body().string(), responseType);
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    onResultCallback.onReceived(res);
+                                }
+                            });
+                        } catch (Exception e) {
+                            state = State.ERROR;
+                            Log.e(TAG,"1. onError: " + e.toString());
+                        }
+                    }
+                }
+        ).start();
+    }
+
+    @Override
     public Observable<T> send() {
         return Observable.create(new ObservableOnSubscribe<T>() {
             @Override
             public void subscribe(ObservableEmitter<T> emitter) throws Exception {
-                OkHttpClient okHttpClient = OkHttp3HttpClient.okHttpClient;
+                OkHttpClient okHttpClient = OkHttp.okHttpClient;
 
                 MediaType contentType = MediaType.parse("application/json; charset=utf-8");
                 RequestBody json = RequestBody.create(contentType, requestBody);
-
 
                 if (method == Method.GET) {
                     request = new Request.Builder()
@@ -61,7 +109,7 @@ public class OkHttpRequest<T> extends HttpRequest<T> {
                     emitter.onComplete();
                 } catch (Exception e) {
                     state = State.ERROR;
-                    Log.e(TAG,"onError " + e.toString());
+                    Log.e(TAG,"2.onError: " + e.toString());
                     emitter.onError(e);
                 }
             }
@@ -74,4 +122,5 @@ public class OkHttpRequest<T> extends HttpRequest<T> {
         call.cancel();
         state = State.CANCELED;
     }
+
 }
