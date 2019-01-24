@@ -8,8 +8,8 @@ and
 
 # Quick Setup
 add EasyOkHttp to dependencies :
-```kotlin
-implementation 'com.github.mehrdadf7:okhttp:1.0.0'
+```java
+implementation 'github.mehrdadf7:okhttp:1.0.2'
 ```
 add RxJava-RxAndroid to dependencies :
 ```kotlin
