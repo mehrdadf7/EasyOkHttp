@@ -1,8 +1,10 @@
 # EasyOkHttp
-Fast and easy RESTful api calls for android and it using: 
+Fast and easy RESTful api request for android that parse response by gson and it using: 
 [OkHttp](https://square.github.io/okhttp)
 and
 [RxJava-RxAndroid](https://github.com/ReactiveX/RxAndroid)
+and
+[Gson](https://github.com/google/gson)
 
 ![screen_shot](https://github.com/mehrdadf7/EasyOkHttp/blob/master/screen_shot.png)
 
