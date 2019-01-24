@@ -4,6 +4,7 @@ Fast and easy RESTful api calls for android and it using:
 and
 [RxJava-RxAndroid](https://github.com/ReactiveX/RxAndroid)
 
+![screen_shot](https://github.com/mehrdadf7/EasyOkHttp/blob/master/screen_shot.png)
 
 # Quick Setup
 add EasyOkHttp to dependencies :
