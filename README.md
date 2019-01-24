@@ -14,7 +14,7 @@ add EasyOkHttp to dependencies :
 implementation 'github.mehrdadf7:okhttp:1.0.3'
 ```
 add RxJava-RxAndroid to dependencies :
-```kotlin
+```java
 implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 ```
