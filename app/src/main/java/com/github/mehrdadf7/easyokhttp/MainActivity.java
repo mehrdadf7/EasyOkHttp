@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
     }
 
     @Override
-    public void onReceived(final ArticleList articleList) {
+    public void onReceived(ArticleList articleList) {
         progressBar.setVisibility(View.GONE);
         status       .setText(articleList.getStatus());
         totalArticles.setText(articleList.getTotalResults()+"");
