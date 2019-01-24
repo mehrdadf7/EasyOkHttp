@@ -3,30 +3,21 @@ package com.github.mehrdadf7.easyokhttp;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.github.mehrdadf7.okhttp.OnResultCallback;
-import com.github.mehrdadf7.okhttp.okhttp.OkHttpRequest;
-
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 public class MainActivity extends AppCompatActivity implements OnResultCallback<ArticleList> {
 
     private ProgressBar progressBar;
-    private AppCompatTextView status, totalArticles;
     private RecyclerView recyclerView;
-    private final String TAG = this.getClass().getSimpleName();
-    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +29,6 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
 
     private void findViews() {
         progressBar   = findViewById(R.id.progressBar);
-        status        = findViewById(R.id.status);
-        totalArticles = findViewById(R.id.totalArticles);
         recyclerView  = findViewById(R.id.recyclerView);
     }
 
@@ -56,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
             progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, android.R.color.white), PorterDuff.Mode.SRC_IN);
         }
 
-        apiService = new ApiService();
+        ApiService apiService = new ApiService();
         apiService.getArticles(this, this);
 
     }
@@ -64,8 +53,6 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
     @Override
     public void onReceived(ArticleList articleList) {
         progressBar.setVisibility(View.GONE);
-        status       .setText(articleList.getStatus());
-        totalArticles.setText(articleList.getTotalResults()+"");
         recyclerView.setAdapter(new ArticleAdapter(articleList.getArticleList()));
     }
 
