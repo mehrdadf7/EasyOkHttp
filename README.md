@@ -18,6 +18,10 @@ add RxJava-RxAndroid to dependencies :
 implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 ```
+(optional) If you need @SerializedName("key_name") add Gson :
+```java
+implementation 'com.google.code.gson:gson:2.8.5'
+```
 
 # How to use
 
