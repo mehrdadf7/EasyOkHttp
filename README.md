@@ -6,7 +6,10 @@ and
 and
 [Gson](https://github.com/google/gson)
 
-![screen_shot](https://github.com/mehrdadf7/EasyOkHttp/blob/master/screen_shot.png)
+<p align="center">
+  <img width="300" height="550" src="https://github.com/mehrdadf7/EasyOkHttp/blob/master/screen_shot0.png">
+  <img width="300" height="550" src="https://github.com/mehrdadf7/EasyOkHttp/blob/master/screen_shot.png">
+</p>
 
 # Quick Setup
 add EasyOkHttp to dependencies :
