@@ -56,16 +56,14 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
             progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, android.R.color.white), PorterDuff.Mode.SRC_IN);
         }
 
-        apiService = new ApiService(this);
-        apiService.getArticles(this);
+        apiService = new ApiService();
+        apiService.getArticles(this, this);
 
     }
 
     @Override
     public void onReceived(final ArticleList articleList) {
         progressBar.setVisibility(View.GONE);
-        Log.e(TAG, "onReceived: " + articleList.getStatus());
-        Log.e(TAG, "onReceived: " + articleList.getTotalResults());
         status       .setText(articleList.getStatus());
         totalArticles.setText(articleList.getTotalResults()+"");
         recyclerView.setAdapter(new ArticleAdapter(articleList.getArticleList()));

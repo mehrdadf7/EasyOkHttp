@@ -12,13 +12,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ApiService {
 
-    private Activity activity;
-
-    public ApiService(Activity activity) {
-        this.activity = activity;
-    }
-
-    public void getArticles(OnResultCallback<ArticleList> onResultCallback) {
+    public void getArticles(Activity activity, OnResultCallback<ArticleList> onResultCallback) {
         OkHttpInjector.getHttpClient().makeRequest(
                 HttpRequest.Method.GET,
                 "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=847968758fc443dcbef779b238029441",
