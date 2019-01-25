@@ -78,6 +78,7 @@ OkHttpInjector.getHttpClient().makeRequest(
             @Override
             public void onError() {
               //handle error
+              Toast.makeText(this, "check internet", Toast.LENGTH_SHORT).show();
             }
         });                
 
