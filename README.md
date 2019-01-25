@@ -26,6 +26,14 @@ implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 implementation 'com.google.code.gson:gson:2.8.5'
 ```
 
+Don't forget Connect your phone to internet :) 
+and notice jcenter() is added :
+```java
+repositories {
+        jcenter()
+    }
+```
+
 # How to use
 
 #### AndroidManifest.xml :
