@@ -14,7 +14,7 @@ and
 # Quick Setup
 add EasyOkHttp to dependencies :
 ```java
-implementation 'github.mehrdadf7:okhttp:1.0.4'
+implementation 'github.mehrdadf7:okhttp:1.0.5'
 ```
 add RxJava-RxAndroid to dependencies :
 ```java
