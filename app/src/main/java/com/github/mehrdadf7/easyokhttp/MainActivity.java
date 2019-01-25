@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
     }
 
     private void findViews() {
-        progressBar   = findViewById(R.id.progressBar);
-        recyclerView  = findViewById(R.id.recyclerView);
+        progressBar  = findViewById(R.id.progressBar);
+        recyclerView = findViewById(R.id.recyclerView);
     }
 
     private void init() {
@@ -37,17 +37,16 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
         recyclerView.setNestedScrollingEnabled(false);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-
             Drawable wrapDrawable = DrawableCompat.wrap(progressBar.getIndeterminateDrawable());
             DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(this, android.R.color.white));
             progressBar.setIndeterminateDrawable(DrawableCompat.unwrap(wrapDrawable));
         } else {
-            progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, android.R.color.white), PorterDuff.Mode.SRC_IN);
+            progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat
+                    .getColor(this, android.R.color.white), PorterDuff.Mode.SRC_IN);
         }
 
         ApiService apiService = new ApiService();
         apiService.getArticles(this, this);
-
     }
 
     @Override
