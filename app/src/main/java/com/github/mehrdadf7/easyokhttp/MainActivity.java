@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
 
     @Override
     public void onError() {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(this, "check internet", Toast.LENGTH_SHORT).show();
     }
 

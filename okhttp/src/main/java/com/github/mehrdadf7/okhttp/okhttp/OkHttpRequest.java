@@ -23,8 +23,7 @@ public class OkHttpRequest<T> extends HttpRequest<T> {
     private Call call;
     private String TAG = getClass().getSimpleName();
 
-    public OkHttpRequest(HttpRequest.Method method, String url,
-                         String requestBody, Class<T> responseType) {
+    OkHttpRequest(HttpRequest.Method method, String url, String requestBody, Class<T> responseType) {
         super(method, url, requestBody, responseType);
         state = State.PENDING;
     }
