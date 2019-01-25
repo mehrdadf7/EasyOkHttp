@@ -75,6 +75,10 @@ OkHttpInjector.getHttpClient().makeRequest(
             public void onReceived(T t) {
                   //response(t)
             }
+            @Override
+            public void onError() {
+              //handle error
+            }
         });                
 
 ```
