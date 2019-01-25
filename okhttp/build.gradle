@@ -42,7 +42,7 @@ artifacts {
     archives generateSourcesJar
 }
 
-version = "1.0.5"
+version = "1.0.7"
 group = "github.mehrdadf7"
 
 bintray {
@@ -54,10 +54,10 @@ bintray {
         name = 'EasyOkHttp'
 
         version {
-            name = '1.0.5'
+            name = '1.0.7'
             desc = 'Android Easy Request by OkHttp'
             released = new Date()
-            vcsTag = '1.0.5'
+            vcsTag = '1.0.7'
         }
 
         licenses = ['Apache-2.0']
