@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.github.mehrdadf7.okhttp.OnResultCallback;
 
@@ -53,6 +54,11 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
     public void onReceived(ArticleList articleList) {
         progressBar.setVisibility(View.GONE);
         recyclerView.setAdapter(new ArticleAdapter(articleList.getArticleList()));
+    }
+
+    @Override
+    public void onError() {
+        Toast.makeText(this, "check internet", Toast.LENGTH_SHORT).show();
     }
 
 }

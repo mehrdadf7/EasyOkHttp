@@ -7,13 +7,10 @@ import com.github.mehrdadf7.okhttp.HttpRequest;
 import com.github.mehrdadf7.okhttp.OnResultCallback;
 import com.google.gson.Gson;
 
-import java.io.IOException;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -70,6 +67,12 @@ public class OkHttpRequest<T> extends HttpRequest<T> {
                         } catch (Exception e) {
                             state = State.ERROR;
                             Log.e(TAG,"1. onError: " + e.toString());
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    onResultCallback.onError();
+                                }
+                            });
                         }
                     }
                 }
