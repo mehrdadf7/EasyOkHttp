@@ -14,9 +14,9 @@ and
 # Quick Setup
 add EasyOkHttp to dependencies :
 ```java
-implementation 'github.mehrdadf7:okhttp:1.0.5'
+implementation 'github.mehrdadf7:okhttp:1.0.6'
 ```
-add RxJava-RxAndroid to dependencies :
+(optional) add RxJava-RxAndroid to dependencies :
 ```java
 implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
@@ -24,6 +24,14 @@ implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 (optional) If you need @SerializedName("key_name") add Gson :
 ```java
 implementation 'com.google.code.gson:gson:2.8.5'
+```
+
+Don't forget Connect your phone to internet :) 
+and notice jcenter() is added :
+```java
+repositories {
+        jcenter()
+    }
 ```
 
 # How to use
