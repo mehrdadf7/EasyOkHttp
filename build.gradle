@@ -1,15 +1,22 @@
 
+
 buildscript {
+
+    ext {
+        okhttp      = 'com.squareup.okhttp3:okhttp:3.12.0'
+        interceptor = 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+        gson        = 'com.google.code.gson:gson:2.8.5'
+        rxandroid   = 'io.reactivex.rxjava2:rxandroid:2.1.0'
+        rxjava      = 'io.reactivex.rxjava2:rxjava:2.2.0'
+    }
+
     repositories {
         google()
         jcenter()
-        maven {
-            url  "https://dl.bintray.com/mehrdadf7/github.mehrdadf7"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
@@ -18,9 +25,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url  "https://dl.bintray.com/mehrdadf7/github.mehrdadf7"
-        }
     }
 }
 
