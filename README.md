@@ -14,8 +14,9 @@ and
 # Quick Setup
 add EasyOkHttp to dependencies :
 ```java
-implementation 'github.mehrdadf7:okhttp:1.1.5'
+implementation 'github.mehrdadf7:okhttp:1.1.6'
 ```
+### min api = 15
 
 Don't forget Connect your phone to internet :) 
 and notice jcenter() is added :
@@ -37,7 +38,7 @@ repositories {
 OkHttpInjector.getHttpClient().makeRequest(
       HttpRequest.Method method, //GET, POST
       String url, 
-      String requestBody, 
+      String requestBody, //JsonObject requestBody
       Class<T> responseType //ClassModel.class
   ).send().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread())
                 .subscribe(new Observer<T>() {
@@ -90,7 +91,7 @@ public void requestName(Observer<ClassModel> observer) {
                 OkHttpInjector.getHttpClient().makeRequest(
                         HttpRequest.Method.GET, //HttpRequest.Method.POST
                         url,
-                        "", //jsonObject.toString()
+                        "", //jsonObject
                         ClassModel.class
                 ).send().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread())
                 .subscribe(observer);
@@ -102,7 +103,7 @@ fun requestName(observer: Observer<ClassModel>) {
         OkHttpInjector.getHttpClient()?.makeRequest(
             HttpRequest.Method.GET, //HttpRequest.Method.POST
             url,
-            "", //jsonObject.toString()
+            "", //jsonObject
             ClassModel::class.java
         )?.send()?.observeOn(AndroidSchedulers.mainThread())?.subscribeOn(Schedulers.newThread())
             ?.subscribe(observer)
