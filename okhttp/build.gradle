@@ -52,7 +52,7 @@ bintray {
     user = properties.getProperty('bintrayUser')
     key = properties.getProperty('bintrayApiKey')
     pkg {
-        repo = 'github.mehrdadf7'
+        repo = group
         userOrg = user
         name = 'EasyOkHttp'
 
