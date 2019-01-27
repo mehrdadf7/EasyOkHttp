@@ -1,4 +1,5 @@
 *.iml
+*.asc
 .gradle
 /local.properties
 /gradle.properties
