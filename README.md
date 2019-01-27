@@ -14,7 +14,7 @@ and
 # Quick Setup
 add EasyOkHttp to dependencies :
 ```java
-implementation 'github.mehrdadf7:okhttp:1.1.5'
+implementation 'github.mehrdadf7:okhttp:1.1.6'
 ```
 
 Don't forget Connect your phone to internet :) 
