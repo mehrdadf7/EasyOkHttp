@@ -16,6 +16,7 @@ add EasyOkHttp to dependencies :
 ```java
 implementation 'github.mehrdadf7:okhttp:1.1.6'
 ```
+### min api = 15
 
 Don't forget Connect your phone to internet :) 
 and notice jcenter() is added :
