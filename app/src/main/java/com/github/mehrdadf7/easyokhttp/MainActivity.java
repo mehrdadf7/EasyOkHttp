@@ -9,16 +9,18 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.github.mehrdadf7.okhttp.OnResultCallback;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
-public class MainActivity extends AppCompatActivity implements OnResultCallback<ArticleList> {
+public class MainActivity extends AppCompatActivity implements Observer<ArticleList> {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
+    private String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +49,27 @@ public class MainActivity extends AppCompatActivity implements OnResultCallback<
         }
 
         ApiService apiService = new ApiService();
-        apiService.getArticles(this, this);
+        apiService.getArticles(this);
+    }
+
+
+    @Override
+    public void onSubscribe(Disposable d) {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onReceived(ArticleList articleList) {
-        progressBar.setVisibility(View.GONE);
+    public void onNext(ArticleList articleList) {
         recyclerView.setAdapter(new ArticleAdapter(articleList.getArticleList()));
     }
 
     @Override
-    public void onError() {
-        progressBar.setVisibility(View.GONE);
-        Toast.makeText(this, "check internet", Toast.LENGTH_SHORT).show();
+    public void onError(Throwable e) {
+        Log.e(TAG, "onError: " + e.toString());
     }
 
+    @Override
+    public void onComplete() {
+        progressBar.setVisibility(View.GONE);
+    }
 }

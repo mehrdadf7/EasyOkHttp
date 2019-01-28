@@ -1,7 +1,5 @@
 package com.github.mehrdadf7.okhttp;
 
-import android.app.Activity;
-
 import io.reactivex.Observable;
 
 public abstract class HttpRequest<T> {
@@ -19,9 +17,7 @@ public abstract class HttpRequest<T> {
         this.responseType = responseType;
     }
 
-    public abstract void send(Activity activity, OnResultCallback<T> onResultCallback);
     public abstract Observable<T> send();
-
     public abstract void cancel();
 
     protected void updateState(State state) {
