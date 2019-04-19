@@ -14,7 +14,7 @@ and
 # Quick Setup
 add EasyOkHttp to dependencies :
 ```java
-implementation 'github.mehrdadf7:okhttp:1.1.6'
+implementation 'github.mehrdadf7:okhttp:1.1.7'
 ```
 ### min api = 15
 
@@ -61,26 +61,7 @@ OkHttpInjector.getHttpClient().makeRequest(
                     public void onComplete() {
                       //complete-request
                     }
-                });
-                
-/*************** OR ******************/    
-
-OkHttpInjector.getHttpClient().makeRequest(
-      HttpRequest.Method method, //GET, POST
-      String url, 
-      String requestBody, 
-      Class<T> responseType //ClassModel.class
-  ).send(activity, new OnResultCallback<T>() {
-            @Override
-            public void onReceived(T t) {
-                  //response(t)
-            }
-            @Override
-            public void onError() {
-              //handle error
-              Toast.makeText(this, "check internet", Toast.LENGTH_SHORT).show();
-            }
-        });                
+                });               
 
 ```
 
